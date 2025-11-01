@@ -4,7 +4,14 @@ export type Product = {
     slug: string;
     price: string;
     status: string;
-    images?: string[];
+    images?: Image[];
     description?: string;
+}
+
+export type Image = {
+    urls: {
+        thumb: string;
+        list: string;
+    }
 }
 
