@@ -1,14 +1,8 @@
-import {get} from "@/lib/api";
-import {Product} from "@/types/product";
-
 import ProductCard from "./ProductCard";
 
-export const revalidate = 120; // revalidate this page every 60 seconds
+export const revalidate = 0; // revalidate this page every 120 seconds
 
-export default async function ProductGrid({ cursor = "", perPage = 15,}: { cursor?: string; perPage?: number }) {
-
-    // Disable data cache for cursor-based pagination to avoid stale lists
-    const res = await get<CursorPage<Product>>(`/products`, { revalidate });
+export default async function ProductGrid({ products = []}: { products: Array<object> }) {
 
     return (
         <section className="container mx-auto py-12">
@@ -18,10 +12,13 @@ export default async function ProductGrid({ cursor = "", perPage = 15,}: { curso
             </div>
 
             <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {res.data.map(p => (
-                    <li key={p.id}><ProductCard product={p} /></li>
+                {products.map(product => (
+                    <li key={product.id}><ProductCard product={product} /></li>
                 ))}
             </ul>
+
+            <div>
+            </div>
         </section>
     )
 }

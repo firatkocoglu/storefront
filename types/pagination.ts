@@ -10,3 +10,11 @@ export type CursorPage<T> = {
         prev?: string | null;
     };
 };
+
+export type Props = {
+    basePath: string;
+    searchParams?: Record<string, string | string[] | undefined>;
+    nextCursor?: string | null;
+    prevCursor?: string | null;
+    cursorParamName?: string;
+}

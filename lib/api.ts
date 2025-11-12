@@ -29,7 +29,7 @@ export async function api<T>(
             credentials: noAuth ? 'omit' : 'include',
             headers: {
                 'Content-Type': 'application/json',
-                ...(noAuth ? {} : (isBrowser ? await authHeader() : {})),
+                ...(noAuth ? {} : (!isBrowser ? await authHeader() : {})),
                 ...(headers || {})
             },
         });
