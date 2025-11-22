@@ -7,7 +7,6 @@ export default async function ProductPage({ params }: { params: { id: string } }
     const product = await get<ProductResponse>(`/products/${id}`)
     const data: Product = product.data;
 
-    console.log(data);
     return (
         <ProductDetail product={data} />
     )

@@ -50,7 +50,7 @@ export default function Navbar() {
                     </Sheet>
 
                     <Link href="/" className="font-semibold tracking-tight">
-                        Acme Store
+                        Fırat Store
                     </Link>
                 </div>
 
@@ -84,7 +84,6 @@ export default function Navbar() {
                         </Link>
                     </Button>
 
-                    {/* (Optional) Cart badge sonra eklenir */}
                     <Button asChild variant="ghost" size="icon" aria-label="Cart">
                         <Link href="/cart">
                             <ShoppingCart className="h-5 w-5" />
