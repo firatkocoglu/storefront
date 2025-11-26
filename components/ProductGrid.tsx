@@ -11,7 +11,7 @@ export default async function ProductGrid({ products = []}: { products: Array<ob
                 <p className="text-sm text-muted-foreground">Hand-picked items for you</p>
             </div>
 
-            <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 items-stretch">
                 {products.map(product => (
                     <li key={product.id}><ProductCard product={product} /></li>
                 ))}

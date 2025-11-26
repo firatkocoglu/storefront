@@ -13,10 +13,10 @@ export default async function ProductDetail  ({product} : {product: Product}) {
 
     return (
         <section className="container mx-auto py-12 grid grid-cols-2 md:grid-cols-2 gap-6">
-            <div>
+            <div className="overflow-hidden">
                 <ProductImages images={images} />
             </div>
-            <div className="product-details flex flex-col gap-4">
+            <div className="product-details flex flex-col gap-6">
                 <div className="details-header flex flex-col gap-2">
                     <h1 className="text-2xl font-semibold">{price}₺</h1>
                 <h1 className="text-xl font-semibold">{capitalizedName}</h1>
