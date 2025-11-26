@@ -1,10 +1,11 @@
 import { Product } from "@/types/product"
-import ProductImages from "@/components/ProductImages";
+import ProductImages from "@/components/Products/Detail/ProductImages";
 import { capitalizeWords } from "@/lib/utils";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, TruckElectric, Undo2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ProductDetailActions } from "@/components/Products/Detail/ProductDetailActions";
 
 export default async function ProductDetail  ({product} : {product: Product}) {
     const { name, description, price, stock } = product;
@@ -57,14 +58,7 @@ export default async function ProductDetail  ({product} : {product: Product}) {
                         </ItemContent>
                     </Item>
                 </div>
-                <div className="add-to-cart flex gap-4">
-                    <Button variant="outline" className="bg-black text-white w-1/2 py-6"><ShoppingCart /> Add to Cart</Button>
-                    {(stock && stock.quantity > 10) ? <Badge variant="secondary" className="bg-green-500 text-white dark:bg-green-600">In Stock</Badge> :
-                        <div className="flex gap-2">
-                        <Badge variant="destructive" className="bg-red-500 text-white dark:bg-red-600">Critical Stock</Badge>
-                        <Badge variant="outline" className="bg-blue-500 text-white dark:bg-blue-600">Last {stock?.quantity} products</Badge>
-                    </div>}
-                </div>
+                <ProductDetailActions productId={product.id} stock={stock}/>
             </div>
         </section>
     )

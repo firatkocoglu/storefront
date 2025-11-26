@@ -1,33 +1,42 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function LoadingGrid() {
+export default function LoadingProductsPage() {
     return (
-        <main className="mx-auto max-w-6xl px-4 py-8">
-            <div className="mb-8 space-y-2">
+        <section className="container mx-auto py-12">
+            {/* Header */}
+            <div className="mb-6 space-y-2">
                 <Skeleton className="h-6 w-40" />
                 <Skeleton className="h-4 w-64" />
             </div>
 
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-                {Array.from({ length: 8 }).map((_, i) => (
-                    <SkeletonProductCard key={i} />
+            {/* Grid */}
+            <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 items-stretch">
+                {Array.from({ length: 8 }).map((_, index) => (
+                    <li key={index}>
+                        <ProductCardSkeleton />
+                    </li>
                 ))}
-            </div>
-        </main>
+            </ul>
+        </section>
     );
 }
 
-function SkeletonProductCard() {
+function ProductCardSkeleton() {
     return (
-        <div className="flex flex-col overflow-hidden rounded-2xl border h-full">
-            <Skeleton className="aspect-[4/5] w-full" />
+        <div className="h-full flex flex-col overflow-hidden rounded-2xl border bg-background">
+            {/* IMAGE */}
+            <Skeleton className="aspect-square w-full" />
 
-            <div className="p-3 flex flex-col flex-1 justify-between">
-                <div className="space-y-2">
-                    <Skeleton className="h-4 w-3/4 mb-3" />
+            {/* CONTENT */}
+            <div className="p-4 flex flex-col justify-between flex-grow">
+                {/* Name */}
+                <div className="flex-1 space-y-2">
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-2/3" />
                 </div>
 
-                <Skeleton className="h-4 w-1/3" />
+                {/* Price */}
+                <Skeleton className="h-4 w-1/3 mt-3 self-end" />
             </div>
         </div>
     );

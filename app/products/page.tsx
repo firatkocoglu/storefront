@@ -1,4 +1,4 @@
-import ProductGrid from "@/components/ProductGrid";
+import ProductGrid from "@/components/Products/ProductGrid";
 import { get } from "@/lib/api";
 import {
     Pagination,

@@ -1,4 +1,4 @@
-import ProductDetail from "@/components/ProductDetail";
+import ProductDetail from "@/components/Products/Detail/ProductDetail";
 import { get } from "@/lib/api";
 import { Product, ProductResponse } from "@/types/product";
 
