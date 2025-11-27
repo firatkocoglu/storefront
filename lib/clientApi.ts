@@ -1,38 +1,37 @@
 /*
- * API utility functions for Next.js SERVER COMPONENTS.
+ * API utility functions for Next.js CLIENT COMPONENTS.
  */
 
-import { cookies } from "next/headers";
 import { ApiInit } from "@/types/api";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
 export async function api<T>(path: string, init: ApiInit = {} as ApiInit): Promise<T> {
-  const { revalidate = 60, noAuth = true, timeoutMs = 10000, headers, ...rest } = init;
+  if (typeof window === "undefined") {
+    throw new Error("This module should only be run on the client.");
+  }
+
+  const { timeoutMs = 10000, withCredentials = true, headers, ...rest } = init;
 
   const url = path.startsWith("http")
     ? path
     : `${API_URL}${path.startsWith("/") ? path : `/${path}`}`;
 
-  // Controllers for timeout
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const isBrowser = typeof window !== "undefined";
-
     const res = await fetch(url, {
       ...rest,
       signal: controller.signal,
-      cache: revalidate === false ? "no-store" : "default",
-      next: revalidate === false ? undefined : { revalidate },
-      credentials: noAuth ? "omit" : "include",
+      credentials: withCredentials ? "include" : "omit",
       headers: {
         "Content-Type": "application/json",
-        ...(noAuth ? {} : !isBrowser ? await authHeader() : {}),
         ...(headers || {}),
       },
     });
+
+    console.log(res);
 
     if (res.status === 204) {
       return null as unknown as T;
@@ -83,14 +82,3 @@ export const patch = <T>(
 
 export const del = <T>(path: string, init?: Omit<ApiInit, "method">) =>
   api<T>(path, { ...init, method: "DELETE" });
-
-export const authHeader = async () => {
-  const cookieStore = await cookies();
-  const xsrfToken = cookieStore.get("XSRF-TOKEN")?.value;
-
-  if (xsrfToken) {
-    return {
-      "X-XSRF-TOKEN": xsrfToken,
-    };
-  }
-};
