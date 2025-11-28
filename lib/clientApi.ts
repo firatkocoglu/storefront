@@ -27,6 +27,7 @@ export async function api<T>(path: string, init: ApiInit = {} as ApiInit): Promi
       credentials: withCredentials ? "include" : "omit",
       headers: {
         "Content-Type": "application/json",
+        "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") || "",
         ...(headers || {}),
       },
     });
@@ -82,3 +83,8 @@ export const patch = <T>(
 
 export const del = <T>(path: string, init?: Omit<ApiInit, "method">) =>
   api<T>(path, { ...init, method: "DELETE" });
+
+function getCookie(name: string): string | null {
+  const value = document.cookie.split("; ").find((row) => row.startsWith(name + "="))?.split("=")[1];
+  return value ? decodeURIComponent(value) : null;
+}

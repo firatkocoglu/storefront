@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
 import { addItemToCart } from "@/lib/cartClient";
 import { toast } from "sonner";
+import { errorToastStyle, successToastStyle } from "@/lib/styles/toastStyles";
 
 export function ProductDetailActions({
   productId,
@@ -21,21 +22,13 @@ export function ProductDetailActions({
       setIsSubmitting(true);
       await addItemToCart(productId);
       toast.success("Item added to cart!", {
-        style: {
-          "--normal-bg": "light-dark(var(--color-green-400), var(--color-green-400))",
-          "--normal-text": "var(--color-white)",
-          "--normal-border": "light-dark(var(--color-green-400), var(--color-green-400))",
-        } as React.CSSProperties,
+        style: successToastStyle as React.CSSProperties,
       });
     } catch (error) {
       console.error("Error adding item to cart: ", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to add item to cart.";
       toast.error(errorMessage, {
-        style: {
-          "--normal-bg": "light-dark(var(--color-red-400), var(--color-red-400))",
-          "--normal-text": "var(--color-white)",
-          "--normal-border": "light-dark(var(--color-red-400), var(--color-red-400))",
-        } as React.CSSProperties,
+        style: errorToastStyle as React.CSSProperties,
       });
     } finally {
       setIsSubmitting(false);

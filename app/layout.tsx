@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Providers from "@/app/provider";
 import Navbar from "@/components/site/Navbar";
 import { Toaster } from "@/components/ui/sonner";
+import CsrfProvider from "@/components/Providers/CsrfProvider";
 
 export const metadata: Metadata = {
   title: "E-Commerce",
@@ -16,12 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-background text-foreground antialiased">
-        <Providers>
+      <body className="bg-background text-foreground h-full antialiased">
+        <CsrfProvider>
           <Navbar />
           {children}
-          <Toaster position="bottom-right" />
-        </Providers>
+        </CsrfProvider>
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );
