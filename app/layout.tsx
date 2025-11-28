@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Providers  from "@/app/provider";
+import Providers from "@/app/provider";
 import Navbar from "@/components/site/Navbar";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "E-Commerce",
@@ -15,13 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="antialiased bg-background text-foreground"
-      >
-      <Providers>
-        <Navbar />
-        {children}
-      </Providers>
+      <body className="bg-background text-foreground antialiased">
+        <Providers>
+          <Navbar />
+          {children}
+          <Toaster position="bottom-right" />
+        </Providers>
       </body>
     </html>
   );

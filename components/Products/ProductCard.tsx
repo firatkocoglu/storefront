@@ -15,7 +15,7 @@ export default async function ProductCard({ product } : {product: Product} ) {
                 </div>
             </a>
 
-        <CardContent className="p-4 flex flex-col justify-between flex-grow">
+        <CardContent className="p-4 flex flex-col justify-between grow">
             <a href={`/products/${product.id}`} className="flex flex-col justify-between h-full">
                 <div className="text-sm text-muted-foreground line-clamp-2 flex-1">{capitalizeWords(product.name)}</div>
                 <div className="mt-1 font-semibold">

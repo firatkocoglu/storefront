@@ -2,10 +2,8 @@ import { Product } from "@/types/product"
 import ProductImages from "@/components/Products/Detail/ProductImages";
 import { capitalizeWords } from "@/lib/utils";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
-import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, TruckElectric, Undo2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ProductDetailActions } from "@/components/Products/Detail/ProductDetailActions";
+import { TruckElectric, Undo2 } from "lucide-react";
 
 export default async function ProductDetail  ({product} : {product: Product}) {
     const { name, description, price, stock } = product;
